@@ -7,10 +7,18 @@ interface ButtonType {
   icon?: string;
   disabled: boolean;
   onPress: string;
+  color: string;
 }
-const Button = ({icon, title, onPress, disabled}: ButtonType) => {
+const Button = ({
+  icon,
+  title,
+  onPress,
+  disabled,
+  accessibilityLabel,
+}: ButtonType) => {
   return (
     <TouchableOpacity
+      accessibilityLabel={accessibilityLabel}
       style={disabled ? styled.containerDisable : styled.container}
       onPress={onPress}
       disabled={disabled}>

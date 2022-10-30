@@ -9,6 +9,11 @@ export const styled = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  checkboxWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 0,
+  },
   shadowProp: {
     shadowColor: '#000',
     shadowOffset: {width: 22, height: 24},

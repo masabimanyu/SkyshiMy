@@ -18,7 +18,7 @@ import {Api} from '../../utils/api';
 import Card from '../../components/Moleculs/Card';
 import HomeCard from './components/HomeCard';
 import Modal from 'react-native-modal';
-import {Icon} from 'react-native-magnus';
+import Icon from 'react-native-vector-icons/dist/AntDesign';
 
 const axios = require('axios');
 
@@ -42,7 +42,7 @@ const Home = () => {
     if (isModalSuccessVisible) {
       setTimeout(() => {
         toggleModalSuccess();
-      }, 2000);
+      }, 80000);
     }
     getData();
   }, []);
@@ -73,6 +73,7 @@ const Home = () => {
       })
       .then(function () {});
   };
+
   const getData = async () => {
     axios
       .get(`${Api}activity-groups?email=abi@testing.os`)
@@ -91,7 +92,12 @@ const Home = () => {
       <Header title="TO DO LIST APP" goBack={false} />
       <View style={styled.titleContainer}>
         <Text style={styled.title}>Activity</Text>
-        <Button icon="+" title="Tambah" onPress={toggleModal} />
+        <Button
+          accessibilityLabel="activity-add-button"
+          icon="+"
+          title="Tambah"
+          onPress={toggleModal}
+        />
       </View>
       {obj?.length > 0 ? (
         <ScrollView
@@ -161,15 +167,7 @@ const Home = () => {
               Tambah List Item
             </Text>
             <TouchableOpacity onPress={toggleModal} activeOpacity={0.8}>
-              <FastImage
-                style={{
-                  width: 13,
-                  height: 13,
-                  paddingVertical: 10,
-                }}
-                source={cancel}
-                resizeMode={FastImage.resizeMode.contain}
-              />
+              <Icon name="close" size={18} color="#111111" />
             </TouchableOpacity>
           </View>
           <View
@@ -194,6 +192,7 @@ const Home = () => {
                 alignSelf: 'flex-end',
               }}>
               <Button
+                accessibilityLabel="modal-add-save-button"
                 title="Simpan"
                 onPress={createNew}
                 disabled={itemTitle ? false : true}
@@ -203,6 +202,7 @@ const Home = () => {
         </View>
       </Modal>
       <Modal
+        accessibilityLabel="modal-information"
         isVisible={isModalSuccessVisible}
         animationIn="fadeIn"
         animationOut="zoomOut"
@@ -215,34 +215,28 @@ const Home = () => {
         <View
           style={{
             borderRadius: 10,
-            height: 80,
+            height: 85,
             width: 320,
             paddingVertical: 10,
             backgroundColor: '#fff',
           }}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignContent: 'center',
-              paddingVertical: 6,
-              paddingHorizontal: 5,
-            }}>
-            <Text style={styled.titleSuccess}>
-              Activity Berhasil Ditambahkan
-            </Text>
+          <View style={{flexDirection: 'column'}}>
+            <View style={{paddingHorizontal: 10, justifyContent: 'flex-end'}}>
+              <Icon name="close" size={18} color="#000" />
+            </View>
             <View
               style={{
-                width: 80,
+                flexDirection: 'row',
                 justifyContent: 'center',
-                marginTop: 7,
+                alignContent: 'center',
                 alignSelf: 'center',
+                marginVertical: 5,
+                paddingHorizontal: 15,
               }}>
-              <Button
-                title="Tutup"
-                onPress={toggleModalSuccess}
-                disabled={false}
-              />
+              <Icon name="infocirlceo" size={18} color="#00A790" />
+              <Text style={styled.titleSuccess}>
+                Activity Berhasil Ditambahkan
+              </Text>
             </View>
           </View>
         </View>

@@ -2,6 +2,8 @@ import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Card from '../../../components/Moleculs/Card';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import {Api} from '../../../utils/api';
 
 interface HomeCardType {
   id?: string;
@@ -28,6 +30,7 @@ const HomeCard = ({data}: HomeCardType) => {
         setObj(saya);
       });
   };
+
   const onPressCard = (item: string): void => {
     navigation.navigate('Details', {value: {item}});
     console.log('Berhasil Pindah', item);
@@ -48,10 +51,8 @@ const HomeCard = ({data}: HomeCardType) => {
         {data?.map((item, index) => {
           return (
             <View style={{marginVertical: 10, marginHorizontal: 10}}>
-              <TouchableOpacity
-                accessibilityLabel="activity-add-button"
-                onPress={() => onPressCard(item)}>
-                <Card data={item} />
+              <TouchableOpacity onPress={() => onPressCard(item)}>
+                <Card data={item} accessibilityLabel="activity-item" />
               </TouchableOpacity>
             </View>
           );
