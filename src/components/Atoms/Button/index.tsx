@@ -1,22 +1,19 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {styled} from './styled';
-import {DefaultNavigationProps} from '../../types';
-import {useNavigation} from '@react-navigation/native';
 
 interface ButtonType {
   title?: string;
   icon?: string;
-  navigation: DefaultNavigationProps<'default'>;
+  disabled: boolean;
+  onPress: string;
 }
-const Button = ({icon, title}: ButtonType) => {
-  const navigation = useNavigation();
-
+const Button = ({icon, title, onPress, disabled}: ButtonType) => {
   return (
     <TouchableOpacity
-      style={styled.container}
-      accessibilityLabel="activity-add-button"
-      onPress={() => navigation.navigate('Details')}>
+      style={disabled ? styled.containerDisable : styled.container}
+      onPress={onPress}
+      disabled={disabled}>
       <View style={styled.containerTitle}>
         <Text style={styled.iconTitle}>{icon && icon}</Text>
         <Text style={styled.title}>{title}</Text>
